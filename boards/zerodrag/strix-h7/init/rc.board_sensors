@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# ZeroDrag Strix H7 R0.2 board sensors initialization
+#------------------------------------------------------------------------------
+
+board_adc start
+
+# Internal IMU 1 on SPI1 - ICM-42688-P (rotation: ROTATION_YAW_270 = 6)
+icm42688p -R 6 -b 1 -s start
+
+# Internal IMU 2 on SPI4 - ICM-42688-P (rotation: ROTATION_YAW_270 = 6)
+icm42688p -R 6 -b 4 -s start
+
+# Internal Barometer on I2C2 - DPS310 @ 0x76 (118 decimal)
+dps310 -I -b 2 -a 118 start

@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# ZeroDrag Strix H7 R0.2 board default parameters
+#------------------------------------------------------------------------------
+
+# Battery 1 nominal divider and current scaling (uncalibrated hardware defaults)
+param set-default BAT1_V_DIV 11.0
+param set-default BAT1_A_PER_V 40.0
+
+# Battery 2 nominal divider (uncalibrated hardware default; current scaling requires field calibration)
+param set-default BAT2_V_DIV 11.0

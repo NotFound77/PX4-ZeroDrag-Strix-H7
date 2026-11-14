@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0d1117; }
+      .title { fill: #58a6ff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 22px; font-weight: bold; }
+      .subtitle { fill: #8b949e; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 13px; }
+      .layer-card { fill: #161b22; stroke: #30363d; stroke-width: 1.5; rx: 8px; }
+      .layer-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; letter-spacing: 1px; }
+      .comp-box { fill: #21262d; stroke: #30363d; stroke-width: 1; rx: 6px; }
+      .comp-box-hl { fill: #1f6feb22; stroke: #58a6ff; stroke-width: 1.5; rx: 6px; }
+      .comp-text { fill: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 500; text-anchor: middle; }
+      .comp-sub { fill: #8b949e; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 10px; text-anchor: middle; }
+      .flow-arrow { stroke: #58a6ff; stroke-width: 1.5; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#58a6ff" />
+    </marker>
+  </defs>
+
+  <rect width="900" height="620" class="bg" />
+
+  <text x="40" y="45" class="title">PX4 Autopilot Software Stack — ZeroDrag Strix H7</text>
+  <text x="40" y="68" class="subtitle">Architectural Layering: Flight Applications, uORB Middleware, Custom Board Drivers &amp; NuttX RTOS</text>
+
+  <!-- Layer 1: Navigation & Flight Control -->
+  <g transform="translate(40, 95)">
+    <rect width="820" height="85" class="layer-card" />
+    <text x="20" y="25" class="layer-title" fill="#f0883e">1. APPLICATION &amp; ESTIMATION LAYER</text>
+    
+    <rect x="20" y="38" width="180" height="36" class="comp-box" />
+    <text x="110" y="56" class="comp-text">Commander &amp; Failsafe</text>
+    <text x="110" y="68" class="comp-sub">Preflight &amp; Arming Logic</text>
+
+    <rect x="220" y="38" width="180" height="36" class="comp-box-hl" />
+    <text x="310" y="56" class="comp-text" fill="#79c0ff">EKF2 Attitude &amp; Position</text>
+    <text x="310" y="68" class="comp-sub">Dual-IMU Fusion (-R 6)</text>
+
+    <rect x="420" y="38" width="180" height="36" class="comp-box" />
+    <text x="510" y="56" class="comp-text">Navigator &amp; Missions</text>
+    <text x="510" y="68" class="comp-sub">Waypoints, RTL, Hold</text>
+
+    <rect x="620" y="38" width="180" height="36" class="comp-box" />
+    <text x="710" y="56" class="comp-text">Rate &amp; Attitude Control</text>
+    <text x="710" y="68" class="comp-sub">Multicopter PID Loops</text>
+  </g>
+
+  <!-- Layer 2: uORB Middleware & Control Allocation -->
+  <g transform="translate(40, 195)">
+    <rect width="820" height="85" class="layer-card" />
+    <text x="20" y="25" class="layer-title" fill="#a371f7">2. MIDDLEWARE &amp; ACTUATOR ALLOCATION</text>
+    
+    <rect x="20" y="38" width="250" height="36" class="comp-box" />
+    <text x="145" y="56" class="comp-text">uORB Pub/Sub Bus</text>
+    <text x="145" y="68" class="comp-sub">sensor_accel, vehicle_attitude, etc.</text>
+
+    <rect x="290" y="38" width="240" height="36" class="comp-box-hl" />
+    <text x="410" y="56" class="comp-text" fill="#79c0ff">Control Allocator (CA)</text>
+    <text x="410" y="68" class="comp-sub">actuator_motors, actuator_servos</text>
+
+    <rect x="550" y="38" width="250" height="36" class="comp-box" />
+    <text x="675" y="56" class="comp-text">MAVLink Telemetry Engine</text>
+    <text x="675" y="68" class="comp-sub">USB CDC ACM + Serial UART</text>
+  </g>
+
+  <!-- Layer 3: Output Drivers -->
+  <g transform="translate(40, 295)">
+    <rect width="820" height="95" class="layer-card" />
+    <text x="20" y="25" class="layer-title" fill="#3fb950">3. OUTPUT DRIVERS &amp; PROTOCOL DISPATCH</text>
+    
+    <rect x="20" y="38" width="380" height="46" class="comp-box-hl" />
+    <text x="210" y="58" class="comp-text" fill="#3fb950">drivers/dshot (PWM_MAIN_TIM0/1)</text>
+    <text x="210" y="74" class="comp-sub">DShot300/600 DMA Burst Engine on TIM3 (S1-S2) &amp; TIM5 (S3-S4)</text>
+
+    <rect x="420" y="38" width="380" height="46" class="comp-box" />
+    <text x="610" y="58" class="comp-text">drivers/pwm_out (PWM_MAIN_TIM2/3)</text>
+    <text x="610" y="74" class="comp-sub">PWM 400Hz/50Hz on TIM4 (S7-S10) &amp; TIM15 (S11-S12)</text>
+  </g>
+
+  <!-- Layer 4: Custom Board Port (ZeroDrag Strix H7) -->
+  <g transform="translate(40, 405)">
+    <rect width="820" height="100" class="layer-card" style="stroke: #58a6ff;" />
+    <text x="20" y="25" class="layer-title" fill="#58a6ff">4. CUSTOM BOARD TARGET: boards/zerodrag/strix-h7</text>
+    
+    <rect x="20" y="38" width="185" height="50" class="comp-box-hl" />
+    <text x="112" y="58" class="comp-text" fill="#79c0ff">timer_config.cpp</text>
+    <text x="112" y="74" class="comp-sub">TIM3, TIM5, TIM4 (DMA1)</text>
+
+    <rect x="220" y="38" width="185" height="50" class="comp-box-hl" />
+    <text x="312" y="58" class="comp-text" fill="#79c0ff">board_dma_map.h</text>
+    <text x="312" y="74" class="comp-sub">DMA1 Timers / DMA2 IMUs</text>
+
+    <rect x="420" y="38" width="185" height="50" class="comp-box-hl" />
+    <text x="512" y="58" class="comp-text" fill="#79c0ff">rc.board_sensors</text>
+    <text x="512" y="74" class="comp-sub">ICM42688P -R 6 &amp; DPS310</text>
+
+    <rect x="620" y="38" width="185" height="50" class="comp-box-hl" />
+    <text x="712" y="58" class="comp-text" fill="#79c0ff">NuttX Board Support</text>
+    <text x="712" y="74" class="comp-sub">Memory Layout, Clocks, SDIO</text>
+  </g>
+
+  <!-- Layer 5: Hardware & ESCs -->
+  <g transform="translate(40, 520)">
+    <rect width="820" height="75" class="layer-card" />
+    <text x="20" y="25" class="layer-title" fill="#8b949e">5. PHYSICAL HARDWARE &amp; EXTERNAL ACTUATORS</text>
+    
+    <rect x="20" y="35" width="250" height="30" class="comp-box" />
+    <text x="145" y="54" class="comp-text">STM32H743VIH6 MCU (480 MHz)</text>
+
+    <rect x="290" y="35" width="240" height="30" class="comp-box" />
+    <text x="410" y="54" class="comp-text">Dual ICM-42688-P + DPS310</text>
+
+    <rect x="550" y="35" width="250" height="30" class="comp-box" />
+    <text x="675" y="54" class="comp-text">4 × LANRC 45A ESCs (Bluejay) + Motors</text>
+  </g>
+</svg>

@@ -1,0 +1,13 @@
+{
+    "board_id": 9069,
+    "magic": "PX4FWv1",
+    "description": "DEVELOPMENT ONLY / PROVISIONAL - ZeroDrag Strix H7 R0.2 (Unreserved Board ID 9069 from ArduPilot hwdef)",
+    "image": "",
+    "build_time": 0,
+    "summary": "StrixH7",
+    "version": "0.1",
+    "image_size": 0,
+    "image_maxsize": 1703936,
+    "git_identity": "",
+    "board_revision": 0
+}
