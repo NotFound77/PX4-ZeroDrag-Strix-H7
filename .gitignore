@@ -120,9 +120,19 @@ _emscripten_sdk/
 # macOS Gazebo environment (Tools/setup/macos/pixi.toml)
 .pixi
 
-# Claude Code local settings and worktrees
-.claude/settings.local.json
-/.claude/worktrees/
+# AI assistant configuration, skills, and worktrees
+.agents/
+.claude/
+CLAUDE.md
+.gemini/
+.antigravity/
+
+# Local IDE configuration & editor swap files
+.idea/
+*.swp
+*~
+*.bak
+*.orig
 
 # Local development scratch and reverse-engineering artifacts
 scratch
