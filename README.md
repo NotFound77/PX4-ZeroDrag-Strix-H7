@@ -36,13 +36,6 @@ This repository is maintained as a fully standalone, buildable PX4 firmware sour
 
 The firmware is designed and validated for the following reference flight setup:
 * **Flight Controller**: ZeroDrag Strix H7 R0.2
-* **Airframe**: F450 Quadcopter (`SYS_AUTOSTART = 4001`)
-* **Motors**: 4 × 2212 920KV brushless motors
-* **ESCs**: 4 × LANRC 45A BLHeli_S running Bluejay firmware
-* **Propellers**: 1045 composite propellers
-* **Power**: 3S–4S LiPo battery with dual analog voltage/current monitoring
-* **Receiver**: ExpressLRS / Crossfire (CRSF) via UART5
-
 ---
 
 ## 4. Flight Controller Specifications
